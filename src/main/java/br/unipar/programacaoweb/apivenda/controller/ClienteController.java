@@ -38,4 +38,36 @@ public class ClienteController {
         }
     }
 
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateCliente(Cliente cliente) {
+        try {
+            clienteService.updateCliente(cliente);
+            return Response.status(Response.Status.CREATED)
+                    .entity("Cliente atualizado com sucesso")
+                    .build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity(ex.getMessage())
+                    .build();
+        }
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteCliente(Cliente cliente) {
+        try {
+            clienteService.deleteCliente(cliente.getId());
+            return Response.status(Response.Status.OK)
+                    .entity("Cliente deletado com sucesso")
+                    .build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity(ex.getMessage())
+                    .build();
+        }
+    }
+
 }

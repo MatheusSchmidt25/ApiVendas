@@ -39,4 +39,38 @@ public class ProdutoController {
     }
 
 
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateProduto(Produto produto
+    ) {
+        try {
+            produtoService.updateProduto(produto);
+            return Response.status(Response.Status.CREATED)
+                    .entity("Produto atualizado com sucesso")
+                    .build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity(ex.getMessage())
+                    .build();
+        }
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteProduto(Produto produto) {
+        try {
+            produtoService.deleteProduto(produto.getId());
+            return Response.status(Response.Status.OK)
+                    .entity("Produto deletado com sucesso")
+                    .build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity(ex.getMessage())
+                    .build();
+        }
+    }
+
+
 }

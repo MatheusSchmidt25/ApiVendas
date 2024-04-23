@@ -28,4 +28,29 @@ public class ClienteRepository {
         String jpql = "SELECT l FROM Cliente l";
         return em.createQuery(jpql, Cliente.class).getResultList();
     }
+
+    public void updateCliente(Cliente cliente) {
+        try {
+            Cliente clienteAtualizado = em.find(Cliente.class, cliente.getId());
+            if (clienteAtualizado != null) {
+                clienteAtualizado.setNome(cliente.getNome());
+                clienteAtualizado.setTelefone(cliente.getTelefone());
+
+                em.merge(clienteAtualizado);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCliente(Integer id) {
+        try {
+            Cliente cliente = em.find(Cliente.class, id);
+            if (cliente != null) {
+                em.remove(cliente);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

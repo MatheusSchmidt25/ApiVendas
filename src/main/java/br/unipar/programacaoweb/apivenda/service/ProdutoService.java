@@ -24,4 +24,13 @@ public class ProdutoService {
         return produtoRepository.getProdutos();
     }
 
+    public void updateProduto(Produto produto) throws Exception{
+        produtoRepository.updateProduto(produto);
+    }
+
+    public void deleteProduto(Integer id){
+        produtoRepository.deleteProduto(id);
+    }
+
+
 }

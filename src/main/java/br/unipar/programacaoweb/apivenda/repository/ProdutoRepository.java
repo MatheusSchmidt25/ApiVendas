@@ -29,4 +29,28 @@ public class ProdutoRepository {
         String jpql = "SELECT l FROM Produto l";
         return em.createQuery(jpql, Produto.class).getResultList();
     }
+
+    public void updateProduto(Produto produto) {
+        try {
+            Produto produtoAtualizado = em.find(Produto.class, produto.getId());
+            if (produtoAtualizado != null) {
+                produtoAtualizado.setDescricao(produto.getDescricao());
+                produtoAtualizado.setValor_unitario(produto.getValor_unitario());
+                em.merge(produtoAtualizado);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteProduto(Integer id) {
+        try {
+            Produto produto = em.find(Produto.class, id);
+            if (produto != null) {
+                em.remove(produto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

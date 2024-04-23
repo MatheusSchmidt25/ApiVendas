@@ -23,5 +23,12 @@ public class ClienteService {
         return clienteRepository.getClientes();
     }
 
+    public void updateCliente(Cliente cliente) throws Exception{
+        clienteRepository.updateCliente(cliente);
+    }
+
+    public void deleteCliente(Integer id){
+        clienteRepository.deleteCliente(id);
+    }
 
 }
